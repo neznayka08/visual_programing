@@ -15,20 +15,22 @@ zoom = '15z'
 target_point = [55.028957, 82.936649]
 i = "i"
 trb = 'trb'
+
+
 with open('data.csv', 'w') as file:
     writer = csv.writer(file)
     writer.writerow(
         (
-            'Координаты',
-            'Высота'
+            'Coordinates',
+            'Height'
         )
     )
-for p in range(1, 50):
+for p in range(1, 30):
     url = 'https://votetovid.ru/#' + str(center[0]) + comma + str(center[1]) + comma + zoom + comma + str(target_point[0]) + comma + str(target_point[1]) + i + comma + trb
     driver.get(url)
     sleep(1)
     html_ = driver.page_source
-    soup = BeautifulSoup(html_, 'lxml')
+    soup = BeautifulSoup(html_, 'html')
     span_txHgt = soup.find_all('span')[0]
     height = span_txHgt.text
     print(target_point, height)
